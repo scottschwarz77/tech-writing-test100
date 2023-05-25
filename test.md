@@ -1,13 +1,12 @@
-In C, when passing variables to a function, we can either use call by value or call by reference. These approaches determine how the function interacts with the variables passed as inputs.
+# Understanding Call-By-Value and Call-By-Reference in C
 
-1. Call by Value:
-When using call by value, the function receives a copy of the variable's value as its input. Any changes made to the variable within the function do not affect the original variable outside the function. Here's how it works:
+In C, when calling a function, you can pass input variables using call-by-value or call-by-reference. These approaches determine how the function will affect the variables passed as inputs.
 
-- The function receives the value of the input variable.
-- It operates on the local copy of the value.
-- Any modifications made to the local copy are not reflected in the original variable.
+## Call-by-value
 
-Here's an example:
+When using call by value, the function receives a copy each input variable. Any changes made to these variable copies within the function do not affect the original variables that were passed to the function when it was called.
+
+Following is an example of call-by-value. The `modifyValue` function receives a copy of `num` as `x`. Even though `x` is modified within the function, the change does not affect the `num` variable that is passed as input to the function.
 
 ```c
 void modifyValue(int x) {
@@ -31,16 +30,11 @@ Inside function: 15
 After function call: 5
 ```
 
-In the example above, the `modifyValue` function receives a copy of `num` as `x`. Even though `x` is modified within the function, the change does not affect the original `num` variable.
-
 2. Call by Reference:
-When using call by reference, the function receives the memory address (pointer) of the variable as its input. This allows the function to directly access and modify the original variable using the pointer. Here's how it works:
 
-- The function receives the memory address (pointer) of the input variable.
-- It uses the pointer to access and modify the original variable directly.
-- Any modifications made to the variable are reflected in the original variable.
+A function that is called using call by reference can indirectly modify input variables that were passed to the function.
 
-Here's an example:
+Following is an example of call-by-reference. The call to the `modifyReference` function sends the memory address of `num` (using `&num`). This address is copied into the `ptr` variable, which is defined in the `modifyReference` function definition. By dereferencing `ptr` (using `*ptr`), the function modifies the value at the address where `ptr` points. Because the address of `num` and `ptr` are the same, the function indirectly modifies the value of `num`.
 
 ```c
 void modifyReference(int* ptr) {
@@ -63,7 +57,3 @@ Before function call: 5
 Inside function: 15
 After function call: 15
 ```
-
-In the example above, the `modifyReference` function receives the memory address of `num` as `ptr`. By using the pointer `ptr` and dereferencing it with `*ptr`, the function can directly modify the original `num` variable.
-
-In summary, call by value passes a copy of the variable's value to the function, while call by reference passes the memory address (pointer) of the variable, allowing the function to directly modify the original variable.
